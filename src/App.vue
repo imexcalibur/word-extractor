@@ -14,23 +14,23 @@ const store = useMainStore();
     </el-header>
 
     <el-main class="app-main">
+      <!-- 第一排：文件列表和规则配置并排 -->
       <el-row :gutter="12">
-        <!-- 左侧：文件列表 -->
-        <el-col :span="4">
+        <el-col :span="12">
           <el-card shadow="hover" class="compact-card">
             <FileList />
           </el-card>
         </el-col>
-
-        <!-- 中间：规则配置 -->
-        <el-col :span="8">
+        <el-col :span="12">
           <el-card shadow="hover" class="compact-card">
             <RuleConfig />
           </el-card>
         </el-col>
+      </el-row>
 
-        <!-- 右侧：预览和导出 -->
-        <el-col :span="12">
+      <!-- 第二排：预览 -->
+      <el-row :gutter="12" style="margin-top: 12px;">
+        <el-col :span="24">
           <el-card shadow="hover" class="compact-card">
             <Preview />
           </el-card>

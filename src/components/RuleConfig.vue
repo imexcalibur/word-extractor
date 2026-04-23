@@ -20,7 +20,7 @@
       <!-- 章节标题配置 -->
       <template v-if="ruleType === 'ChapterTitle'">
         <el-form-item label="标题匹配">
-          <el-input v-model="chapterTitlePattern" placeholder="如: 第.*章.*风险" />
+          <el-input v-model="chapterTitlePattern" placeholder="输入正则表达式" />
         </el-form-item>
         <el-form-item label="包含子章节">
           <el-switch v-model="chapterIncludeSubsections" />
@@ -33,10 +33,10 @@
       <!-- 表格关键词配置 -->
       <template v-if="ruleType === 'TableKeyword'">
         <el-form-item label="匹配列头">
-          <el-input v-model="tableColumnHeader" placeholder="如: 风险等级" />
+          <el-input v-model="tableColumnHeader" placeholder="输入列头关键词" />
         </el-form-item>
         <el-form-item label="匹配值">
-          <el-input v-model="tableColumnValue" placeholder="如: 高 (可选)" />
+          <el-input v-model="tableColumnValue" placeholder="筛选值（可选）" />
         </el-form-item>
         <el-form-item label="提取范围">
           <el-select v-model="tableExtractMode">
@@ -57,7 +57,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="关键词">
-          <el-input v-model="paragraphKeyword" placeholder="如: 整改措施：" />
+          <el-input v-model="paragraphKeyword" placeholder="输入关键词" />
         </el-form-item>
         <el-form-item label="提取范围">
           <el-select v-model="paragraphRangeMode">
@@ -67,7 +67,7 @@
           </el-select>
         </el-form-item>
         <el-form-item v-if="paragraphRangeMode === 'UntilMarker'" label="结束标记">
-          <el-input v-model="paragraphEndMarker" placeholder="如: 责任人：" />
+          <el-input v-model="paragraphEndMarker" placeholder="输入结束标记" />
         </el-form-item>
         <el-form-item v-if="paragraphRangeMode === 'Multi'" label="最大段落数">
           <el-input-number v-model="paragraphMaxParagraphs" :min="1" :max="20" size="small" />
