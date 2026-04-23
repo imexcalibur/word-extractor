@@ -1,0 +1,28 @@
+[package]
+name = "word-extractor"
+version = "0.1.0"
+description = "Word文档内容提取工具"
+authors = ["you"]
+edition = "2021"
+
+[lib]
+name = "word_extractor_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1"
+zip = "8"
+roxmltree = "0.20"
+rust_xlsxwriter = "0.94"
+thiserror = "2"
+
