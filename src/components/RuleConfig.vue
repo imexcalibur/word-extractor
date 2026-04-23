@@ -1,15 +1,15 @@
 <template>
   <div class="rule-config">
     <div class="header">
-      <h3>📋 提取规则配置</h3>
+      <h3>提取规则配置</h3>
     </div>
 
-    <el-form label-width="80px" style="margin-top: 16px">
+    <el-form label-width="70px" size="small">
       <el-form-item label="规则类型">
         <el-select v-model="ruleType" placeholder="选择规则类型" @change="resetConfig">
-          <el-option label="📖 章节标题定位" value="ChapterTitle" />
-          <el-option label="📊 表格关键词定位" value="TableKeyword" />
-          <el-option label="📝 段落关键词定位" value="ParagraphKeyword" />
+          <el-option label="章节标题" value="ChapterTitle" />
+          <el-option label="表格关键词" value="TableKeyword" />
+          <el-option label="段落关键词" value="ParagraphKeyword" />
         </el-select>
       </el-form-item>
 
@@ -70,28 +70,28 @@
           <el-input v-model="paragraphEndMarker" placeholder="如: 责任人：" />
         </el-form-item>
         <el-form-item v-if="paragraphRangeMode === 'Multi'" label="最大段落数">
-          <el-input-number v-model="paragraphMaxParagraphs" :min="1" :max="20" />
+          <el-input-number v-model="paragraphMaxParagraphs" :min="1" :max="20" size="small" />
         </el-form-item>
       </template>
 
       <el-form-item>
-        <el-button type="primary" @click="addRule" :disabled="!canAdd">添加规则</el-button>
+        <el-button type="primary" size="small" @click="addRule" :disabled="!canAdd">添加规则</el-button>
       </el-form-item>
     </el-form>
 
     <!-- 已添加规则列表 -->
     <div class="rules-list" v-if="store.rules.length > 0">
       <h4>已添加规则:</h4>
-      <el-table :data="store.rules" max-height="200">
-        <el-table-column prop="name" label="名称" />
-        <el-table-column prop="rule_type" label="类型" width="100">
+      <el-table :data="store.rules" max-height="150" size="small">
+        <el-table-column prop="name" label="名称" show-overflow-tooltip />
+        <el-table-column prop="rule_type" label="类型" width="60">
           <template #default="{ row }">
             {{ getTypeLabel(row.rule_type) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="80">
+        <el-table-column label="操作" width="50">
           <template #default="{ row }">
-            <el-button type="danger" size="small" @click="store.removeRule(row.id)">
+            <el-button type="danger" size="small" link @click="store.removeRule(row.id)">
               删除
             </el-button>
           </template>
@@ -192,7 +192,7 @@ function getConfig(): RuleConfig {
 function addRule() {
   const config = getConfig();
   const rule: ExtractionRule = {
-    id: '',
+    id: crypto.randomUUID(),
     name: ruleName.value,
     rule_type: ruleType.value,
     config,
@@ -214,19 +214,21 @@ function getTypeLabel(type: RuleType): string {
 
 <style scoped>
 .rule-config {
-  padding: 16px;
+  padding: 0;
 }
 
 .header h3 {
-  margin: 0;
+  margin: 0 0 8px 0;
+  font-size: 14px;
 }
 
 .rules-list {
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .rules-list h4 {
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   color: #666;
+  font-size: 12px;
 }
 </style>

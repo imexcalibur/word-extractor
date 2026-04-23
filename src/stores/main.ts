@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { invoke } from '@tauri-apps/api/core';
-import { open } from '@tauri-apps/plugin-dialog';
+import { save, open } from '@tauri-apps/plugin-dialog';
 import type { Document, ExtractionRule, ExtractionResult, Template } from '../types';
 
 export const useMainStore = defineStore('main', {
@@ -11,6 +11,7 @@ export const useMainStore = defineStore('main', {
     templates: [] as Template[],
     isLoading: false,
     error: null as string | null,
+    success: null as string | null,
   }),
 
   actions: {
@@ -82,6 +83,7 @@ export const useMainStore = defineStore('main', {
           docIds,
           rules: this.rules,
         });
+        this.success = `提取完成，共 ${this.results.length} 条结果`;
       } catch (e) {
         this.error = String(e);
       } finally {
@@ -96,8 +98,8 @@ export const useMainStore = defineStore('main', {
       }
 
       try {
-        const savePath = await open({
-          save: true,
+        this.error = null;
+        const savePath = await save({
           filters: [{ name: 'Excel', extensions: ['xlsx'] }],
           defaultPath: '提取结果.xlsx',
         });
@@ -107,6 +109,7 @@ export const useMainStore = defineStore('main', {
             results: this.results,
             outputPath: savePath,
           });
+          this.success = `已导出到: ${savePath}`;
         }
       } catch (e) {
         this.error = String(e);
@@ -120,8 +123,8 @@ export const useMainStore = defineStore('main', {
       }
 
       try {
-        const savePath = await open({
-          save: true,
+        this.error = null;
+        const savePath = await save({
           filters: [{ name: 'Markdown', extensions: ['md'] }],
           defaultPath: '提取结果.md',
         });
@@ -131,6 +134,7 @@ export const useMainStore = defineStore('main', {
             results: this.results,
             outputPath: savePath,
           });
+          this.success = `已导出到: ${savePath}`;
         }
       } catch (e) {
         this.error = String(e);
@@ -154,6 +158,7 @@ export const useMainStore = defineStore('main', {
         };
         await invoke('save_template', { template });
         await this.loadTemplates();
+        this.success = `模板 "${name}" 已保存`;
       } catch (e) {
         this.error = String(e);
       }
@@ -161,6 +166,11 @@ export const useMainStore = defineStore('main', {
 
     applyTemplate(template: Template) {
       this.rules = [...template.rules];
+    },
+
+    clearMessages() {
+      this.error = null;
+      this.success = null;
     },
   },
 });
