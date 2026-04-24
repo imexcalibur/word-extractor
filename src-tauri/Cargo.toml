@@ -1,6 +1,6 @@
 [package]
 name = "word-extractor"
-version = "0.2.1"
+version = "0.2.2"
 description = "Word文档内容提取工具"
 authors = ["you"]
 edition = "2021"

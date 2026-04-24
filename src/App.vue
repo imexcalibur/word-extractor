@@ -74,6 +74,11 @@ const store = useMainStore();
         style="margin-top: 12px;"
       />
     </el-main>
+
+    <!-- 版权标记 -->
+    <el-footer class="app-footer">
+      <span class="copyright">© 2026 hy</span>
+    </el-footer>
   </el-container>
 </template>
 
@@ -147,5 +152,18 @@ body {
 
 .action-row {
   margin-top: 12px;
+}
+
+.app-footer {
+  height: 24px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+}
+
+.copyright {
+  color: #c0c4cc;
+  font-size: 11px;
 }
 </style>

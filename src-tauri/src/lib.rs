@@ -2,6 +2,9 @@ mod models;
 mod parsers;
 mod commands;
 
+// App signature marker
+const APP_SIGNATURE: &str = "ovo.v0.2.2";
+
 use commands::{AppState, add_files, get_documents, remove_document, clear_documents,
     extract_content, preview_extraction, save_template, load_templates, delete_template,
     export_to_excel, export_to_markdown, export_to_word};
