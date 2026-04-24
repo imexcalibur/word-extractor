@@ -22,7 +22,7 @@ export const useMainStore = defineStore('main', {
 
         const files = await open({
           multiple: true,
-          filters: [{ name: 'Word Documents', extensions: ['docx', 'doc'] }],
+          filters: [{ name: 'Word Documents', extensions: ['docx'] }],
         });
 
         if (files) {

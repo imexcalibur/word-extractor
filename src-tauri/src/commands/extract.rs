@@ -11,10 +11,14 @@ pub fn add_files(paths: Vec<String>, state: State<AppState>) -> Result<Vec<Docum
     let mut new_docs = Vec::new();
 
     for path in paths {
-        if path.ends_with(".docx") || path.ends_with(".doc") {
+        // 只支持 .docx 格式（ZIP 格式）
+        if path.ends_with(".docx") {
             let doc = Document::new(path);
             new_docs.push(doc.clone());
             docs.push(doc);
+        } else if path.ends_with(".doc") {
+            // .doc 是 OLE2 格式，不支持
+            return Err(format!("不支持 .doc 格式文件: {}。请将文档另存为 .docx 格式后再添加。", path));
         }
     }
 
