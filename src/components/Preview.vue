@@ -5,7 +5,7 @@
       <el-button-group v-if="store.results.length > 0" size="small">
         <el-button type="success" @click="store.exportExcel">导出 Excel</el-button>
         <el-button type="success" @click="store.exportMarkdown">导出 Markdown</el-button>
-        <el-button type="success" @click="store.exportWord">导出 Word</el-button>
+        <el-button type="success" @click="store.exportHtml">导出 HTML</el-button>
       </el-button-group>
     </div>
 

@@ -141,7 +141,7 @@ export const useMainStore = defineStore('main', {
       }
     },
 
-    async exportWord() {
+    async exportHtml() {
       if (this.results.length === 0) {
         this.error = '没有可导出的结果';
         return;
