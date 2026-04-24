@@ -141,6 +141,31 @@ export const useMainStore = defineStore('main', {
       }
     },
 
+    async exportWord() {
+      if (this.results.length === 0) {
+        this.error = '没有可导出的结果';
+        return;
+      }
+
+      try {
+        this.error = null;
+        const savePath = await save({
+          filters: [{ name: 'HTML', extensions: ['html'] }],
+          defaultPath: '提取结果.html',
+        });
+
+        if (savePath) {
+          await invoke('export_to_word', {
+            results: this.results,
+            outputPath: savePath,
+          });
+          this.success = `已导出到: ${savePath}`;
+        }
+      } catch (e) {
+        this.error = String(e);
+      }
+    },
+
     async loadTemplates() {
       try {
         this.templates = await invoke<Template[]>('load_templates');

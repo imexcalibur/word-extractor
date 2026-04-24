@@ -4,7 +4,7 @@ mod commands;
 
 use commands::{AppState, add_files, get_documents, remove_document, clear_documents,
     extract_content, preview_extraction, save_template, load_templates, delete_template,
-    export_to_excel, export_to_markdown};
+    export_to_excel, export_to_markdown, export_to_word};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -23,7 +23,8 @@ pub fn run() {
             load_templates,
             delete_template,
             export_to_excel,
-            export_to_markdown
+            export_to_markdown,
+            export_to_word
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
